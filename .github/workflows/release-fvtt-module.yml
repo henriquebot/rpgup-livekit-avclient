@@ -43,7 +43,12 @@ jobs:
       - name: Create tag changelog
         id: changelog
         run: |
-          CHANGELOG=$(git log --reverse --pretty=oneline --abbrev-commit ${{ needs.check_version.outputs.module_previous_version }}..HEAD)
+          PREVIOUS="${{ needs.check_version.outputs.module_previous_version }}"
+          if git rev-parse "$PREVIOUS" >/dev/null 2>&1; then
+            CHANGELOG=$(git log --reverse --pretty=oneline --abbrev-commit "$PREVIOUS"..HEAD)
+          else
+            CHANGELOG=$(git log -1 --pretty=oneline --abbrev-commit HEAD)
+          fi
           echo "Got changelog: $CHANGELOG"
           {
             echo "changelog<<EOF"
