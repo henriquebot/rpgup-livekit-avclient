@@ -1,5 +1,9 @@
 # RPG Up fork changes
 
+## 0.6.9-rpgup.5
+
+- Temporarily force WebRTC relay-only to validate the self-hosted TURN path on mobile networks.
+
 ## 0.6.9-rpgup.4
 
 - Forked upstream LiveKit AVClient 0.6.8.
