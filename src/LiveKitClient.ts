@@ -622,8 +622,9 @@ export default class LiveKitClient {
 
     // Set the livekit room options
     const liveKitRoomOptions: RoomOptions = {
-      adaptiveStream: liveKitPublishDefaults.simulcast,
-      dynacast: liveKitPublishDefaults.simulcast,
+      // Keep adaptive subscriptions/dynacast enabled for VP9 SVC.
+      adaptiveStream: true,
+      dynacast: true,
       publishDefaults: liveKitPublishDefaults,
     };
 
@@ -1083,11 +1084,11 @@ export default class LiveKitClient {
       game.user?.id ?? "",
     );
 
-    // Set resolution higher if simulcast is enabled
-    let videoResolution = VideoPresets43.h180.resolution;
-    if (this.trackPublishOptions.simulcast) {
-      videoResolution = VideoPresets43.h720.resolution;
-    }
+    // RPG Up constrained-bandwidth profile: capture at 480p/24 fps.
+    const videoResolution = {
+      ...VideoPresets43.h480.resolution,
+      frameRate: 24,
+    };
 
     return typeof videoSrc === "string" &&
       videoSrc !== "disabled" &&
@@ -1370,19 +1371,18 @@ export default class LiveKitClient {
   get trackPublishOptions(): TrackPublishOptions {
     const trackPublishOptions: TrackPublishOptions = {
       audioPreset: AudioPresets.speech,
-      simulcast: true,
-      videoCodec: "vp8",
 
-      // RPG Up quality profile:
-      // Keep adaptive simulcast, but give motion-heavy webcam video more bitrate.
+      // RPG Up constrained-bandwidth test profile:
+      // VP9 uses SVC instead of classic simulcast, which is more efficient
+      // when the mobile route has limited/variable bandwidth.
+      simulcast: false,
+      videoCodec: "vp9",
+      scalabilityMode: "L3T3_KEY",
+      degradationPreference: "maintain-resolution",
       videoEncoding: {
-        maxBitrate: 2_500_000,
-        maxFramerate: 30,
+        maxBitrate: 700_000,
+        maxFramerate: 24,
       },
-      videoSimulcastLayers: [
-        new VideoPreset(240, 180, 250_000, 30),
-        new VideoPreset(480, 360, 700_000, 30),
-      ],
     };
 
     if (game.settings?.get(MODULE_NAME, "audioMusicMode")) {

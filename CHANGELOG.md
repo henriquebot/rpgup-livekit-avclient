@@ -1,5 +1,11 @@
 # RPG Up fork changes
 
+## 0.6.9-rpgup.6
+
+- Test a constrained-bandwidth webcam profile using VP9 SVC at 480p/24 fps.
+- Cap the camera track at 700 kbps and prefer preserving resolution under congestion.
+- Keep adaptive stream and dynacast enabled while using VP9 SVC.
+
 ## 0.6.9-rpgup.5
 
 - Temporarily force WebRTC relay-only to validate the self-hosted TURN path on mobile networks.
