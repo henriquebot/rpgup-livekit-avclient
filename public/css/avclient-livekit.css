@@ -1,0 +1,82 @@
+.camera-view .av-control.toggle .fa-closed-captioning.active {
+  color: #fff;
+}
+
+.camera-view .av-control.livekit-control.hidden {
+  display: none;
+}
+
+.camera-view .av-control.livekit-control.disabled {
+  pointer-events: none;
+}
+
+.camera-view .connection-quality-indicator {
+  height: 12px;
+  width: 12px;
+  border: 1px solid #f0f0e0;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+}
+
+.camera-view .connection-quality-indicator.excellent {
+  background-color: green;
+}
+
+.camera-view .connection-quality-indicator.good {
+  background-color: yellow;
+}
+
+.camera-view .connection-quality-indicator.poor {
+  background-color: firebrick;
+}
+
+.camera-view .connection-quality-indicator.unknown {
+  background-color: #f0f0e0;
+}
+
+.camera-view .status-remote-hidden,
+.camera-view .status-remote-muted {
+  font-size: 20px;
+  width: 30px;
+  line-height: 30px;
+  color: #ba2200;
+}
+.camera-view .status-remote-hidden.hidden,
+.camera-view .status-remote-muted.hidden,
+.camera-view .status-remote-ptt.hidden {
+  display: none;
+}
+
+.camera-view .status-remote-ptt {
+  font-size: 20px;
+  width: 30px;
+  line-height: 30px;
+  color: gray;
+}
+
+.camera-view .status-remote-ptt.active {
+  color: greenyellow;
+}
+
+.camera-view .control-bar.left {
+  z-index: 30;
+}
+
+/* HACK: Needed due to a bug in FVTT v13 */
+.camera-view .video-container .user-camera {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* HACK: Needed due to a bug in FVTT v13 - flip the local camera */
+.camera-view .video-container .local-camera {
+  transform: scaleX(-1);
+}
+
+#av-config .form-fields > button {
+  flex-basis: 100%;
+}
