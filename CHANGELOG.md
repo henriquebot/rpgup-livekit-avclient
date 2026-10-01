@@ -1,5 +1,9 @@
 # RPG Up fork changes
 
+## 0.6.9-rpgup.7
+
+- Fix the VP9 480p test profile build by removing an obsolete import.
+
 ## 0.6.9-rpgup.6
 
 - Test a constrained-bandwidth webcam profile using VP9 SVC at 480p/24 fps.

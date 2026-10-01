@@ -21,7 +21,6 @@ import {
   Track,
   TrackPublication,
   VideoCaptureOptions,
-  VideoPreset,
   VideoPresets43,
   VideoTrack,
   DisconnectReason,
