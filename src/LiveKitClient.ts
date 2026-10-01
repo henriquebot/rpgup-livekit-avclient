@@ -1083,10 +1083,11 @@ export default class LiveKitClient {
       game.user?.id ?? "",
     );
 
-    // RPG Up constrained-bandwidth profile: capture at 480p/24 fps.
+    // RPG Up production profile: 4:3 720p at up to 30 fps.
+    // LiveKit can still adapt delivery through VP9 SVC when bandwidth changes.
     const videoResolution = {
-      ...VideoPresets43.h480.resolution,
-      frameRate: 24,
+      ...VideoPresets43.h720.resolution,
+      frameRate: 30,
     };
 
     return typeof videoSrc === "string" &&
@@ -1371,16 +1372,15 @@ export default class LiveKitClient {
     const trackPublishOptions: TrackPublishOptions = {
       audioPreset: AudioPresets.speech,
 
-      // RPG Up constrained-bandwidth test profile:
-      // VP9 uses SVC instead of classic simulcast, which is more efficient
-      // when the mobile route has limited/variable bandwidth.
+      // RPG Up production webcam profile.
+      // VP9 uses SVC, so classic simulcast layers are not used here.
       simulcast: false,
       videoCodec: "vp9",
       scalabilityMode: "L3T3_KEY",
-      degradationPreference: "maintain-resolution",
+      degradationPreference: "balanced",
       videoEncoding: {
-        maxBitrate: 700_000,
-        maxFramerate: 24,
+        maxBitrate: 1_800_000,
+        maxFramerate: 30,
       },
     };
 

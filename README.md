@@ -1,13 +1,34 @@
 # RPG Up LiveKit AVClient
 
-Private RPG Up fork of [bekriebel/fvtt-module-avclient-livekit](https://github.com/bekriebel/fvtt-module-avclient-livekit).
+RPG Up fork of [bekriebel/fvtt-module-avclient-livekit](https://github.com/bekriebel/fvtt-module-avclient-livekit), kept as a drop-in replacement by preserving the module ID `avclient-livekit`.
 
-## RPG Up changes
+## RPG Up production profile
 
-- Keeps LiveKit simulcast and adaptive streaming enabled.
-- Raises webcam simulcast targets to 250 kbps (low), 700 kbps (medium), and 2.5 Mbps (high).
-- Uses up to 30 fps for the custom webcam quality profile.
-- Preserves the upstream module ID `avclient-livekit` so this fork acts as a drop-in replacement.
+- VP9 with SVC (`L3T3_KEY`) for webcam video.
+- 4:3 720p capture, up to 30 fps.
+- Webcam bitrate cap: 1.8 Mbps.
+- Adaptive Stream and Dynacast remain enabled.
+- Normal WebRTC ICE selection is used: direct UDP/TCP first when available, TURN as fallback.
+- No API keys or secrets are stored in this repository.
+
+## Self-hosted LiveKit notes
+
+The RPG Up deployment/testing notes are documented in [docs/RPGUP-SELF-HOSTED-LIVEKIT.md](docs/RPGUP-SELF-HOSTED-LIVEKIT.md).
+
+Important transport summary:
+
+- Signaling: HTTPS/WSS reverse-proxied to LiveKit `7880/TCP`.
+- Preferred media: `7882/UDP`.
+- TCP media fallback: `7881/TCP`.
+- TURN listener: `3478/UDP`.
+- TURN relay range used in the RPG Up test deployment: `30000-30100/UDP`.
+- TURN relay ports must be published by Docker **and** allowed by the cloud/network firewall.
+
+## Installation
+
+Manifest:
+
+`https://github.com/henriquebot/rpgup-livekit-avclient/releases/latest/download/module.json`
 
 > Upstream authorship and licenses are preserved. See the LICENSE files included in this repository.
 
@@ -40,7 +61,7 @@ A replacement for the native SimplePeer / EasyRTC A/V client in FoundryVTT. The 
 
 ## Installation
 
-You can install this module by using the following manifest URL: <https://github.com/bekriebel/fvtt-module-avclient-livekit/releases/latest/download/module.json>
+For the RPG Up fork, use this manifest URL: <https://github.com/henriquebot/rpgup-livekit-avclient/releases/latest/download/module.json>
 
 ## Configuration
 

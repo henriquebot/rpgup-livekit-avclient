@@ -1,5 +1,13 @@
 # RPG Up fork changes
 
+## 0.6.9-rpgup.8
+
+- End the temporary relay-only diagnostic mode and restore normal WebRTC ICE selection.
+- Set the production webcam profile to VP9 SVC, 720p/30 fps, with a 1.8 Mbps cap.
+- Keep Adaptive Stream and Dynacast enabled.
+- Document the RPG Up self-hosted LiveKit/TURN deployment and troubleshooting findings.
+- Correct the README installation link to the RPG Up fork manifest.
+
 ## 0.6.9-rpgup.7
 
 - Fix the VP9 480p test profile build by removing an obsolete import.
