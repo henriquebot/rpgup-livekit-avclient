@@ -1,6 +1,6 @@
 # RPG Up fork changes
 
-## 0.6.9-rpgup.2
+## 0.6.9-rpgup.3
 
 - Forked upstream LiveKit AVClient 0.6.8.
 - Increased webcam simulcast bitrate targets to 250 kbps / 700 kbps / 2.5 Mbps.
