@@ -374,6 +374,12 @@ export default class LiveKitAVClient extends foundry.av.AVClient {
     // Set the livekit room options
     const liveKitRoomConnectOptions: RoomConnectOptions = {
       autoSubscribe: true,
+
+      // TEMP: RPG Up TURN diagnostic.
+      // Force relay-only so this test proves whether TURN is actually usable.
+      rtcConfig: {
+        iceTransportPolicy: "relay",
+      },
     };
 
     if (
