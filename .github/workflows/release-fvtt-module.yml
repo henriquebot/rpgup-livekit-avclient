@@ -5,6 +5,9 @@ on:
 
 name: Release FoundryVTT Module
 
+permissions:
+  contents: write
+
 jobs:
   check_version:
     name: Check FoundryVTT module version
